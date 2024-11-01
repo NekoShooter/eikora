@@ -45,8 +45,10 @@
     background-image: radial-gradient(circle at 50% 50%, var(--reflejo) 50%, transparent 80%);
     box-shadow: 4px 4px 2px 0 var(--reflejo), -4px -4px 2px 0 var(--sombra), inset -2px -2px 1px 0 var(--reflejo);}
 
-.svgMicro{
+.microApagado{
     fill: var(--ctxt);}
+.microEncendido{
+    fill: var(--rojo);}
 
 main{
     width: 100%;

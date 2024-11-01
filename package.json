@@ -1,0 +1,20 @@
+{
+  "name": "eikora",
+  "version": "0.0.1",
+  "description": "Captura y lee en voz alta los mensajes del chat, enviándolos directamente a los audífonos del streamer. Es perfecto para streamers principiantes o aquellos que se dedican a actividades intensas, ya que les permite mantenerse conectados con su comunidad y responder rápidamente a los espectadores sin perder el enfoque en el contenido de su transmisión.",
+  "main": "src",
+  "scripts": {
+    "dev": "webpack --watch --mode=development",
+    "produccion": "webpack --mode=production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "5.96.1",
+    "webpack-cli": "5.1.4"
+  },
+  "dependencies": {
+    "taimy": "1.0.1"
+  }
+}

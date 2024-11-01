@@ -1,45 +1,44 @@
 <div class="conConfig">
     <div>
-        <span class="styTxt">Idioma :</span>
+        <span class="styTxt">Voces :</span>
         <label>
-            <select class="styTxt">
-                <option value="Opción 1" selected>Opción 1</option>
+            <select id="idiomas" class="styTxt">
             </select>
         </label>
     </div>
     <div>
         <span class="styTxt">Volumen :</span>
         <label>
-            <input type="range" id="volumeControl" min="0" max="100" step="1" value="100">
-            <input type="number" min="0" max="100" value="100">
+            <input type="range" id="volumeControl" min="0" max="100" step="1" value="0">
+            <input type="number" id="volumeInt" min="0" max="100" value="0">
         </label>
     </div>
 
     <div>
         <span class="styTxt">Velocidad de lectura :</span>
         <label>
-            <input type="range" id="VelocidadDeLectura" min="0" max="200" step="1" value="100">
-            <input type="number" min="0" max="200" value="100">
+            <input type="range" id="VelocidadDeLecturaControl" min="1" max="200" step="1" value="0">
+            <input type="number" id="VelocidadDeLecturaInt" min="1" max="200" value="0">
         </label>
     </div>
 
     <div>
         <span class="styTxt">Tiempo de respuesta :</span>
         <label>
-            <input type="number" min="100" value="3000">
+            <input id="tiempoRespuesta" type="number" min="100" value="0">
         </label>
     </div>
 
     <div>
         <span class="styTxt">Tiempo de reacci&oacute;n :</span>
         <label>
-            <input type="number" min="0" value="2000">
+            <input id="tiempoReaccion" type="number" min="0" value="0">
         </label>
     </div>
     <div>
         <span class="styTxt">Tolerancia de ruido :</span>
         <label>
-            <input type="number" min="0" max="1" value="0.01" step="0.01">
+            <input id="umbral" type="number" min="0" max="1" step="0.01">
         </label>
     </div>
 

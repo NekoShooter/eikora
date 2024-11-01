@@ -16,15 +16,16 @@ export default class Lectora {
         this.#micro.ejecutarEnActivo(()=>{
             //if(this.#voz.estaLeyendo) return;
             this.#timing.detener();
-            console.log('estas hablando')});
+            //console.log('estas hablando')
+        });
         
         this.#micro.ejecutarEnSilencio(()=>{
-            console.log(`la voz esta leyendo ${this.#voz.estaLeyendo}`);
+            //console.log(`la voz esta leyendo ${this.#voz.estaLeyendo}`);
             if(!this.#voz.estaLeyendo)
                 this.#voz.lee(this.#chat.obtenerMensaje());});
 
         this.#voz.ejecutarAlterminarDeLeer(()=>{
-            console.log(`micro en silencio: ${this.#micro.estaEnSilencio}`)
+            //console.log(`micro en silencio: ${this.#micro.estaEnSilencio}`)
             if(this.#micro.estaEnSilencio) this.#timing.reinicioTotal();});
 
         this.#micro.ejecutarAlpedirPermiso((seDioPermiso)=>{
@@ -34,19 +35,27 @@ export default class Lectora {
     configurar(obj){
         this.#voz.configuracion = obj;
         this.#micro.configuracion = obj;
-        this.tiempoDeRespuesta(obj?.timing);}
+        this.tiempoDeRespuesta = obj?.timing;}
 
     dameConfiguracion(){return Object.assign({timing: this.#timing.espera},this.#chat.configuracion,this.#micro.configuracion);}
 
-    volumen(porcentaje){this.#voz.volumen = porcentaje};
-    idioma(lenguaje){this.#voz.idioma = lenguaje;}
-    velocidadDeLectura(porcenteje){this.#voz.velocidadDeLectura = porcenteje;}
-    umbralDeSonido(umbral){this.#micro.umbral = umbral;}
-    tiempoDeReaccion(milisegundos){this.#micro.tiempoDeReaccion = milisegundos;}
-    tiempoDeRespuesta(milisegundos){
-        if(typeof(milisegundos) == 'number' && milisegundos >= 100){
-            this.#timing.espera = milisegundos;}}
+    set volumen(porcentaje){this.#voz.volumen = porcentaje};
+    get volumen(){return this.#voz.volumen;}
+    set velocidadDeLectura(porcenteje){this.#voz.velocidadDeLectura = porcenteje;}
+    get velocidadDeLectura(){return this.#voz.velocidadDeLectura;}
+    set umbralDeSonido(umbral){this.#micro.umbral = umbral;}
+    get umbralDeSonido(){return this.#micro.umbral;}
+    set tiempoDeReaccion(milisegundos){this.#micro.tiempoDeReaccion = milisegundos;}
+    get tiempoDeReaccion(){return this.#micro.tiempoDeReaccion;}
+    set tiempoDeRespuesta(milisegundos){
+            if(typeof(milisegundos) == 'number' && milisegundos >= 100){
+                this.#timing.espera = milisegundos;}}
+    get tiempoDeRespuesta(){return this.#timing.espera;}
+    get microfono(){return this.#micro;}
+    get chat(){return this.#chat;}
 
+    idioma(lenguaje){this.#voz.idioma = lenguaje;}
+    cambiarVoz(nuevaVoz){this.#voz.voz = nuevaVoz;}
     arrancar(){this.#micro.accederAMicrofono();}
 
     agregarNuevoMensaje(usuario,mensaje){

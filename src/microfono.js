@@ -6,6 +6,7 @@ export default class Microfono{
     #fnMicroConectado = undefined;
 
     #estaHablando = false;
+    #nombre=undefined;
 
     #retardo = 2000;
     #taimy;
@@ -19,6 +20,8 @@ export default class Microfono{
     constructor(configuracion){
         this.detectarSonido = this.detectarSonido.bind(this);
         this.accederAMicrofono = this.accederAMicrofono.bind(this);
+        this.apagar = this.apagar.bind(this);
+        this.encender = this.encender.bind(this);
         this.configuracion = configuracion;}
 
     set configuracion(config){
@@ -45,6 +48,7 @@ export default class Microfono{
 
     get estaEnSilencio(){return !this.#estaHablando;}
     get estaApagado(){return !this.#deteccionActiva;}
+    get nombre(){return this.#nombre;}
 
     #hayFunciones(){return this.#fnMicroActivo && this.#fnMicroSilencio }
 
@@ -75,6 +79,8 @@ export default class Microfono{
                 // Conectar el micrófono al contexto y al analizador
                 this.#micro = this.#audioCtx.createMediaStreamSource(stream);
                 this.#micro.connect(this.#analizador);
+                this.#nombre = stream.getAudioTracks()[0].label
+
                 if(this.#fnMicroConectado) this.#fnMicroConectado(true);})
 
             .catch(error => {
@@ -85,6 +91,10 @@ export default class Microfono{
     detectarSonido(onoff = true){
         this.#deteccionActiva = !!onoff;
         this.#deteccionDeSonido();}
+
+    apagar(){this.detectarSonido(false);}
+    encender(){if(this.estaApagado) this.detectarSonido(true)}
+    interruptor(){this.detectarSonido(!this.estaApagado);}
 
     #deteccionDeSonido(){
         if(!this.#deteccionActiva || !this.#hayFunciones){
