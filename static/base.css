@@ -1,0 +1,42 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+:root{
+    color-scheme: dark light;
+    --rojo: rgb(235, 88, 55);
+    --verde: rgb(55, 235, 160);
+    --azul: rgb(74, 127, 241);
+    --oscuro: #212121;
+    --oscuroA: #21212122;
+    --claro:#e3e6e6;
+    --claroA: #e3e6e622;
+    --fondo:var(--claro);
+    --contra-fondo: #fff;
+    --ctxt: var(--oscuro);
+    --reflejo: var(--oscuroA);
+    --sombra: var(--claroA);
+}
+
+body.dark-theme{
+    --fondo: var(--oscuro);
+    --contra-fondo:#4d5156;
+    --ctxt: var(--claro);
+    --reflejo: var(--claroA);
+    --sombra: var(--oscuroA)
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--fondo);
+    color: var(--ctxt);
+    font-size: 62.5%;
+    font-family: "Ubuntu", serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+

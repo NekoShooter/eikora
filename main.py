@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for
 from Almacen import almacen
 from Chat import Chat
 
@@ -30,8 +30,6 @@ def arrancar():
             if condicion[condicion]: chats.arrancar()
             else: chats.detener()
         return 201
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

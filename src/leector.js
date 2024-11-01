@@ -44,7 +44,7 @@ export default class Lectora {
     umbralDeSonido(umbral){this.#micro.umbral = umbral;}
     tiempoDeReaccion(milisegundos){this.#micro.tiempoDeReaccion = milisegundos;}
     tiempoDeRespuesta(milisegundos){
-        if(typeof(milisegundos) == 'number' && milisegundos > 100){
+        if(typeof(milisegundos) == 'number' && milisegundos >= 100){
             this.#timing.espera = milisegundos;}}
 
     arrancar(){this.#micro.accederAMicrofono();}

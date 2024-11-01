@@ -1,0 +1,177 @@
+.contenedorMicro,
+#btnMicro,
+.chats>div,
+.chats>div label>div,
+.chats>div label>div button{
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+
+.contenedorMicro{
+    min-width: 320px;
+    max-width: 600px;
+    width: 80%;
+    height: 20%;
+    flex-direction: column;}
+
+.styTxt, .conConfig>div input[type="number"], .conConfig>div select option, .chats>div label input[type="url"]{
+    font-family: "Ubuntu", serif;
+    color: var(--ctxt);
+    font-size: 1rem;}
+
+.contenedorMicro>span{
+    padding-block: 10px;
+    opacity: .5;}
+
+#btnMicro,#btnAgregarUrl, .chats>div label>div button{
+    border-radius: 50%;
+    background-color: transparent;
+    background: none;
+    border: none;
+    cursor: pointer;}
+
+#btnMicro,#btnAgregarUrl{
+    aspect-ratio: 1;}
+
+#btnMicro{
+    height: 70%;
+    padding: 5%;
+    border-radius: 50%;
+    background-color: var(--contra-fondo);
+    background-image: radial-gradient(circle at 80% 65%, var(--reflejo) 20%, transparent 80%);
+    box-shadow: 4px 4px 2px 0 var(--reflejo), -4px -4px 2px 0 var(--sombra);}
+
+#btnMicro:active{
+    background-image: radial-gradient(circle at 50% 50%, var(--reflejo) 50%, transparent 80%);
+    box-shadow: 4px 4px 2px 0 var(--reflejo), -4px -4px 2px 0 var(--sombra), inset -2px -2px 1px 0 var(--reflejo);}
+
+.svgMicro{
+    fill: var(--ctxt);}
+
+main{
+    width: 100%;
+    flex-grow: .8;
+    padding: 5%;
+    display: flex;}
+
+main>div{
+    width: 50%;
+    height: 100%;}
+
+.conConfig>div{
+    width: 100%;
+    height: 10%;
+    min-height: 50px;
+    position:relative;}
+
+.conConfig>div>span{
+    position: absolute;
+    opacity: .8;
+    font-size: .8rem;
+    top:3px;
+    left:5px;}
+
+.conConfig>div>label{
+    transform: translateX(20%);
+    width: 80%; 
+    height: 100%;
+    display: flex;
+    align-items: center;}
+
+.conConfig>div select{
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;}
+
+.conConfig>div select option{border-radius: 10px;}
+
+
+.conConfig>div input[type="range"]{
+    margin: 10px;
+    margin-left: 0;}
+
+.conConfig>div input[type="number"]{
+    -moz-appearance: textfield;
+    padding: 5px;
+    background: none;
+    border: none;
+    border-radius: 8px;}
+
+.conConfig>div input[type="number"]::-webkit-inner-spin-button,
+.conConfig>div input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;}
+
+.conConfig>div select:focus, .conConfig>div input[type="number"]:focus{
+    outline: none;
+    border: none;
+    background-color: var(--reflejo);}
+
+#btnAgregarUrl{
+    width: 50px;
+    margin: 5px;
+    background-color: var(--reflejo);}
+
+#btnAgregarUrl:hover{
+    background-image: radial-gradient(circle at 50% 50%, var(--reflejo) 50%, transparent 70%);}
+
+#btnAgregarUrl:active{
+    background-image:none;
+    background-color: var(--azul);}
+
+#btnAgregarUrl:active >svg{
+    stroke: var(--claro);
+    fill: var(--claro);}
+
+#btnAgregarUrl>svg{
+    width: 100%;
+    height: 100%;
+    padding: 10%;
+    stroke: var(--ctxt);
+    fill: var(--ctxt);}
+
+.chats>div{
+    width: 100%;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: var(--reflejo);}
+
+#conNuevaUrl{
+    background-color: transparent;
+    margin: 0;
+    border-radius: 0;}
+
+.chats>div label{
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+    display: flex;}
+
+.chats>div label>div{
+    height: 100%;
+    aspect-ratio: 1;}
+
+.chats>div label input[type="url"]{
+    flex-grow: 1;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.chats>div label input[type="url"]:focus{
+    outline: none;
+    border: none;
+}
+
+.chats>div label>div button{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: 1px solid var(--ctxt);}
+
+.chats>div img{
+    width: 30px;}
+
+.svgEmit{fill: var(--rojo);}
+.svgEnlace{stroke: var(--ctxt);}
