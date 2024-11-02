@@ -14,13 +14,13 @@ def root():
 def get():
     return almacen.entregar(),200
 
-@app.route('/chat',methods = ['POST'])
+@app.route('/api/chat',methods = ['POST'])
 def connectar():
     url = request.form.get('url_valida')
     listaChats.append(Chat(url))
     return 201
 
-@app.route('/arrancar',methods = ['POST'])
+@app.route('/api/arrancar',methods = ['POST'])
 def arrancar():
     condicion = {'true':True, 'false':False}[request.form.get('onoff')]
     if len(listaChats) == 0:
