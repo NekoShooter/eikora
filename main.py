@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template,jsonify
 from Almacen import almacen
 from Chat import Chat
 
@@ -10,26 +10,58 @@ listaChats = []
 def root():
     return render_template('index.html')
 
+
 @app.route('/mensajes')
 def get():
     return almacen.entregar(),200
 
+
 @app.route('/api/chat',methods = ['POST'])
 def connectar():
-    url = request.form.get('url_valida')
-    listaChats.append(Chat(url))
-    return 201
+    #url = request.get_data(as_text=True)
+    data = request.get_json()
+    url = data.get("url")
 
-@app.route('/api/arrancar',methods = ['POST'])
+    print(f'nueva direccion agregada: {url}')
+    for chats in listaChats:
+        if chats.url == url:
+            return jsonify(False)
+        
+    chat = Chat(url)
+
+    if bool(chat):
+        listaChats.append(chat)
+
+    return jsonify(bool(chat))
+
+
+@app.route('/api/chat/estado',methods = ['POST'])
 def arrancar():
-    condicion = {'true':True, 'false':False}[request.form.get('onoff')]
-    if len(listaChats) == 0:
-        return 404
+    data = request.get_json()
+    onoff = {'on':True,'off':False}[data.get('estado')]
+    url = data.get('url')
+
+    respuesta = {
+        "error":False,
+        "detenido":False}
+    
+    if len(listaChats) == 0 or not isinstance(onoff,bool):
+        respuesta["error"] = True
     else: 
-        for chats in listaChats:
-            if condicion[condicion]: chats.arrancar()
-            else: chats.detener()
-        return 201
+        for chat in listaChats:
+            if chat.url == url:
+                chat.detener(not onoff)
+                if onoff:
+                    chat.mostrarPorConsola()
+                    chat.arrancar()
+                respuesta["detenido"] = chat.enEjecucion
+
+    return jsonify(respuesta)
+
+@app.route('/api/chat/msn',methods=['GET'])
+def msn():
+    return jsonify(almacen.entregar())
+
 
 if __name__ == '__main__':
     app.run(debug=True)

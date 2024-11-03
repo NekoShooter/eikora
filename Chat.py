@@ -5,15 +5,16 @@ class Chat:
     def __init__(self,urlStream) -> None:
         self.estaActualizado = False
         self.detenerEjecucion = False
+        self.enEjecucion = False
         self.__mostrar = False
         self.chat = None
         self.plataforma = 'e'
         self.plataformasDisponibles={'y':'youtube','t':'twitch'}
-        self.url(urlStream)
+        self.asignarUrl(urlStream)
 
-    def url(self,urlStream) -> None:
+    def asignarUrl(self,urlStream) -> None:
         if not isinstance(urlStream,str):return
-        self.direccion = urlStream
+        self.url = urlStream
 
         if self.plataformasDisponibles['y'] in urlStream:
             self.plataforma = 'y'
@@ -21,15 +22,25 @@ class Chat:
             self.plataforma = 't'
         else:
             return
-        self.chat = ChatDownloader().get_chat(self.direccion)
+        try:
+            self.chat = ChatDownloader().get_chat(self.url)
+        except:
+            self.url = None
+            self.chat = None
+    # si se castea a bool para saber si el objeto es valido
+    def __bool__(self)->bool:
+        return bool(self.chat)
 
     def detener(self,onoff:True) -> None:
         self.detenerEjecucion = bool(onoff)
 
     def arrancar(self) -> None:
-        if self.chat == None:return
+        if self.chat == None or self.enEjecucion:return
+        self.enEjecucion = True
         for mensaje in self.chat:
-            if(self.detenerEjecucion):break
+            if(self.detenerEjecucion):
+                self.enEjecucion = False
+                break
             i = self.data(mensaje)
             almacen.agregar(i)
             if self.__mostrar:

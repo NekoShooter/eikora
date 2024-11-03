@@ -16,16 +16,16 @@ export default class Lectora {
         this.#micro.ejecutarEnActivo(()=>{
             //if(this.#voz.estaLeyendo) return;
             this.#timing.detener();
-            //console.log('estas hablando')
+            console.log('estas hablando')
         });
         
         this.#micro.ejecutarEnSilencio(()=>{
-            //console.log(`la voz esta leyendo ${this.#voz.estaLeyendo}`);
+            console.log(`la voz esta leyendo ${this.#voz.estaLeyendo}`);
             if(!this.#voz.estaLeyendo)
                 this.#voz.lee(this.#chat.obtenerMensaje());});
 
         this.#voz.ejecutarAlterminarDeLeer(()=>{
-            //console.log(`micro en silencio: ${this.#micro.estaEnSilencio}`)
+            console.log(`micro en silencio: ${this.#micro.estaEnSilencio}`)
             if(this.#micro.estaEnSilencio) this.#timing.reinicioTotal();});
 
         this.#micro.ejecutarAlpedirPermiso((seDioPermiso)=>{
