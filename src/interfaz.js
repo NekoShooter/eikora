@@ -21,7 +21,7 @@ export class Configurador {
         this.#enlazador('VelocidadDeLecturaControl','VelocidadDeLecturaInt','velocidadDeLectura',200,1);
         this.#ingresador('tiempoRespuesta','tiempoDeRespuesta',100);
         this.#ingresador('tiempoReaccion','tiempoDeReaccion');
-        this.#ingresador('umbral','umbralDeSonido',0.01,1);
+        this.#ingresador('umbral','umbralDeSonido',0.01);
         this.#selectorIdiomas('idiomas');
         this.#imgMicro = document.getElementById('micro-svg');}
 
@@ -166,6 +166,7 @@ export class UrlChats{
                 postApiChat('mensaje','',(repuesta)=>{
                     if(repuesta == '[]') return;
                     const data = JSON.parse(repuesta);
+                    
                     data.forEach(paquete=>{
                         lector.agregarNuevoMensaje(paquete.usuario,paquete.msn);
                     });

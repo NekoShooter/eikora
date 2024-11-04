@@ -55,6 +55,7 @@ def arrancar():
                     chat.mostrarPorConsola()
                     chat.arrancar()
                 respuesta["detenido"] = chat.enEjecucion
+                break
 
     return jsonify(respuesta)
 

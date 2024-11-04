@@ -67,6 +67,7 @@ export default class Microfono{
             
             navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
+                
                 this.#permisoConsedido = true;
                 // Crear el contexto de audio
                 this.#audioCtx = new AudioContext();
@@ -81,7 +82,13 @@ export default class Microfono{
                 this.#micro.connect(this.#analizador);
                 this.#nombre = stream.getAudioTracks()[0].label
 
-                if(this.#fnMicroConectado) this.#fnMicroConectado(true);})
+                if(this.#fnMicroConectado) this.#fnMicroConectado(true);
+            
+                const mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.ondataavailable = (event) => {
+                    worker.postMessage(event.data); // Envía datos al Worker
+                };
+                mediaRecorder.start();})
 
             .catch(error => {
                 this.#permisoConsedido = false;

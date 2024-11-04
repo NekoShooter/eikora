@@ -24,12 +24,13 @@ class Chat:
             return
         try:
             self.chat = ChatDownloader().get_chat(self.url)
+            print('tipo: ',self.chat)
         except:
             self.url = None
             self.chat = None
     # si se castea a bool para saber si el objeto es valido
     def __bool__(self)->bool:
-        return bool(self.chat)
+        return bool(self.url)
 
     def detener(self,onoff:True) -> None:
         self.detenerEjecucion = bool(onoff)
@@ -44,7 +45,7 @@ class Chat:
             i = self.data(mensaje)
             almacen.agregar(i)
             if self.__mostrar:
-                print(f'[{i['plataforma']['nombre']}] {'(Moderador) 'if i['esMod'] else ''}{'(Miembro) 'if i['esMiembro'] else ''}{i['usuario']} : {i['msn']} {{{i['tipo'] }}}')
+                print(f'[{i['plataforma']['nombre']}] {'(Moderador) 'if i['esMod'] else ''}{i['usuario']} : {i['msn']} {{{i['tipo'] }}}')
 
     def data(self,datos)->dict:
         data = {
@@ -54,15 +55,16 @@ class Chat:
             'msn':datos['message'],
             'tipo':datos['message_type'],
             'tiempo':datos['timestamp'],
+            'esMiembro':False,
             'esMod':False}
         
-        if self.plataforma == 't':
+        if data['plataforma']['id'] == 't':
             data['usuario'] = datos['author']['display_name']
             data['esMod']= datos['author']['is_moderator']
+            data['esSub'] = datos['author']['is_subscriber']
             data['turbo'] = datos['author']['is_turbo']
-            data['icon'] = datos['author']['icons']
 
-        elif self.plataforma == 'y':
+        elif data['plataforma']['id'] == 'y':
             data['usuario'] = datos['author']['name']
             data['esMiembro'] = False
             data['avatar'] = datos['author']['images'][0]['url']
